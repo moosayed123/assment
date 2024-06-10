@@ -1,0 +1,16 @@
+import cv2
+from ultralyrics import YOLO 
+model = YOLO("")
+cap = cv2.VideoCapture(1)
+while True:
+    ret,frame = cap.read()
+    if not ret:
+        print("open camera")
+        break 
+    result = model(frame)
+    frame2 = result[0].plot()
+    cv2.imshow('camera video', frame2)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.realese()
+cv2.destroyAllWindows()
