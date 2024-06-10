@@ -1,0 +1,38 @@
+#include <Servo.h>
+Servo myservo;
+void setup() {
+pinMode(5,OUTPUT);
+pinMode(3,OUTPUT);
+myservo.attach(7);
+}
+void loop() {
+int sdata=analogRead(A0);
+if(sdata<=500)
+{
+myservo.write(0);
+digitalWrite(5,HIGH);
+digitalWrite(3,LOW);
+}
+else if(sdata>500 && sdata<=750)
+{
+myservo.write(0);
+digitalWrite(5,LOW);
+digitalWrite(3,HIGH);
+}
+else if(sdata>750)
+{
+for(int pos=0;pos<=180;pos++)
+{
+myservo.write(pos);
+delay(10);
+}
+delay(100);
+for(int pos=180;pos>0;pos--)
+{
+myservo.write(pos);
+delay(10);
+}
+digitalWrite(5,LOW);
+digitalWrite(3,LOW);
+}
+}
